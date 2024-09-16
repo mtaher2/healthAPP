@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "148212081283",
+    "project_id": "healthethics-3d615",
+    "storage_bucket": "healthethics-3d615.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:148212081283:android:51aea91493fba9b7f2b1b6",
+        "android_client_info": {
+          "package_name": "com.example.health"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2EYgmrbdkR74U08nczXL0zAOwZo4WNmY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
