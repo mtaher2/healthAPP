@@ -24,7 +24,7 @@ class MyButtons extends StatelessWidget {
                   Radius.circular(30),
                 ),
               ),
-              color: Color(0xff4771f5)),
+              color: Color(0xff3058a6)),
           child: Text(
             text,
             style: const TextStyle(

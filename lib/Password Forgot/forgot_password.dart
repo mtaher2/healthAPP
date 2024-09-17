@@ -84,7 +84,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 ),
                 const SizedBox(height: 20),
                 ElevatedButton(
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
+                  style: ElevatedButton.styleFrom(backgroundColor: Color(0xff3058a6)),
                   onPressed: () async {
                     // Validate email field is not empty
                     if (emailController.text.isEmpty) {

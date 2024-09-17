@@ -1,23 +1,36 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_firebase_project/Login%20Signup/Screen/Modules/Module1/1.3_EthicalPrinciples.dart';
+import 'quiz_page.dart';  // Create this page
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xff4771f5),
-        title: const Center(
-          child: Text("Home Page",
-          style: TextStyle(
-            color: Colors.white,
-          ),
-          ),
+        title: Text('Quiz App'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'Welcome to the Quiz App!\nClick Start to begin the quiz.',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 20),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => EthicalPrinciplesPage()),
+                );
+              },
+              child: Text('Start Quiz'),
+            ),
+          ],
         ),
       ),
-      
     );
   }
 }
