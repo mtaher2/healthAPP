@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_firebase_project/Login%20Signup/Screen/Modules/Module1/1.3_EthicalPrinciples.dart';
 import 'package:flutter_firebase_project/Login%20Signup/Widget/button.dart';
 import 'package:flutter_firebase_project/Password%20Forgot/forgot_password.dart';
 import 'package:connectivity_plus/connectivity_plus.dart'; // Import for checking connectivity
@@ -7,7 +6,6 @@ import 'package:email_validator/email_validator.dart'; // Import for email valid
 import '../Services/authentication.dart';
 import '../Widget/snackbar.dart';
 import '../Widget/text_field.dart';
-import 'Modules/Module1/1.5_CaseStudies.dart';
 import 'home_screen.dart';
 import 'signup.dart';
 
@@ -72,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
         });
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => InstructionsPage1_5(),
+            builder: (context) => HomeScreen(),
           ),
         );
       } else {

@@ -15,7 +15,6 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
@@ -24,5 +23,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-// Before start the video setup your project with firebase
-// If you have any problem to setup then firebase setup video is in i button and description
+
