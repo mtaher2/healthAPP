@@ -51,6 +51,8 @@ class InstructionsPage1_5 extends StatelessWidget {
     ),
   ];
 
+  InstructionsPage1_5({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,7 +66,7 @@ class InstructionsPage1_5 extends StatelessWidget {
             color: Colors.white,
           ),
         ),
-        backgroundColor: Color(0xFF3058a6), // Primary color
+        backgroundColor: const Color(0xFF3058a6), // Primary color
       ),
       body: LayoutBuilder(
         builder: (context, constraints) {
@@ -79,7 +81,7 @@ class InstructionsPage1_5 extends StatelessWidget {
                     style: TextStyle(
                       fontSize: constraints.maxWidth > 600 ? 28 : 24,
                       fontWeight: FontWeight.bold,
-                      color: Color(0xFF3058a6), // Primary color
+                      color: const Color(0xFF3058a6), // Primary color
                     ),
                   ),
                   const SizedBox(height: 20),
@@ -88,7 +90,7 @@ class InstructionsPage1_5 extends StatelessWidget {
                     style: TextStyle(
                       fontSize: constraints.maxWidth > 600 ? 24 : 20,
                       fontWeight: FontWeight.bold,
-                      color: Color(0xFF6d90c6), // Secondary color
+                      color: const Color(0xFF6d90c6), // Secondary color
                     ),
                   ),
                   const SizedBox(height: 10),
@@ -99,7 +101,7 @@ class InstructionsPage1_5 extends StatelessWidget {
                     style: TextStyle(
                       fontSize: constraints.maxWidth > 600 ? 24 : 20,
                       fontWeight: FontWeight.bold,
-                      color: Color(0xFF6d90c6), // Secondary color
+                      color: const Color(0xFF6d90c6), // Secondary color
                     ),
                   ),
                   const SizedBox(height: 10),
@@ -136,7 +138,7 @@ class InstructionsPage1_5 extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           '• ',
           style: TextStyle(
             fontSize: 16,
@@ -146,7 +148,7 @@ class InstructionsPage1_5 extends StatelessWidget {
         Expanded(
           child: Text(
             text,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 16,
               color: Colors.black87,
             ),
@@ -171,7 +173,7 @@ class InstructionsPage1_5 extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           '• ',
           style: TextStyle(
             fontSize: 16,
@@ -181,7 +183,7 @@ class InstructionsPage1_5 extends StatelessWidget {
         Expanded(
           child: Text(
             text,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 16,
               color: Colors.black87,
             ),
@@ -197,8 +199,8 @@ class InstructionsPage1_5 extends StatelessWidget {
         children: [
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: Color(0xFF3058a6), // Primary color
-              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+              backgroundColor: const Color(0xFF3058a6), // Primary color
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
             ),
             onPressed: () {
               Navigator.push(
@@ -217,8 +219,8 @@ class InstructionsPage1_5 extends StatelessWidget {
           const SizedBox(height: 10),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: Color(0xFF3058a6), // Primary color
-              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+              backgroundColor: const Color(0xFF3058a6), // Primary color
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
             ),
             onPressed: () {
               Navigator.push(

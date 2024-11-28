@@ -9,7 +9,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 class QuizPage extends StatefulWidget {
   final List<QuizQuestion> questions;
   final String quizId;
-  QuizPage({required this.questions, required this.quizId});
+  const QuizPage({super.key, required this.questions, required this.quizId});
 
   @override
   _QuizPageState createState() => _QuizPageState();
@@ -39,7 +39,7 @@ class _QuizPageState extends State<QuizPage> {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           _scrollController.animateTo(
             _scrollController.position.maxScrollExtent,
-            duration: Duration(milliseconds: 300),
+            duration: const Duration(milliseconds: 300),
             curve: Curves.easeOut,
           );
         });
@@ -161,7 +161,7 @@ Future<void> _storeQuizResults() async {
       }
     } else {
       // Handle subsequent submissions
-      double previousScorePercentage = (userData?[widget.quizId]['score'] ?? 0) / widget.questions.length * 100;
+      double previousScorePercentage = (userData[widget.quizId]['score'] ?? 0) / widget.questions.length * 100;
 
       // Update quiz result without changing the score if it's not the first submission
       await userDoc.set({
@@ -174,7 +174,7 @@ Future<void> _storeQuizResults() async {
 
       // Compare and update score if necessary
       if (percentageScore > 50 && previousScorePercentage <= 50) {
-        int currentScore = userData?['score'] ?? 0;
+        int currentScore = userData['score'] ?? 0;
         await userDoc.update({
           'score': currentScore + 50,
         });
@@ -191,7 +191,7 @@ Future<void> _storeQuizResults() async {
         // Keep the previous higher score
         await userDoc.update({
           widget.quizId: {
-            'score': userData?[widget.quizId]['score'],
+            'score': userData[widget.quizId]['score'],
             'totalQuestions': widget.questions.length,
             'timestamp': FieldValue.serverTimestamp(),
           }

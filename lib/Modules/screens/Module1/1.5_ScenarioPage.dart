@@ -5,6 +5,8 @@ import 'package:intl/intl.dart'; // Import intl for date formatting
 import 'package:connectivity_plus/connectivity_plus.dart'; // For checking internet connectivity
 
 class ScenarioPage extends StatefulWidget {
+  const ScenarioPage({super.key});
+
   @override
   _ScenarioPageState createState() => _ScenarioPageState();
 }
@@ -97,7 +99,7 @@ class _ScenarioPageState extends State<ScenarioPage> {
     User? user = FirebaseAuth.instance.currentUser;
     if (user == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('You need to be logged in to submit an answer!')),
+        const SnackBar(content: Text('You need to be logged in to submit an answer!')),
       );
       return;
     }
@@ -110,11 +112,11 @@ class _ScenarioPageState extends State<ScenarioPage> {
         _submittedAnswer = answer;
       });
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Answer submitted successfully!')),
+        const SnackBar(content: Text('Answer submitted successfully!')),
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Answer cannot be empty!')),
+        const SnackBar(content: Text('Answer cannot be empty!')),
       );
     }
   }
@@ -132,14 +134,14 @@ class _ScenarioPageState extends State<ScenarioPage> {
     if (_isLoading) {
       return Scaffold(
         appBar: AppBar(
-          backgroundColor: Color(0xFF3058a6),
-          iconTheme: IconThemeData(color: Colors.white),
-          title: Text(
+          backgroundColor: const Color(0xFF3058a6),
+          iconTheme: const IconThemeData(color: Colors.white),
+          title: const Text(
             'Scenario-Based Question',
             style: TextStyle(color: Colors.white),
           ),
         ),
-        body: Center(child: CircularProgressIndicator(
+        body: const Center(child: CircularProgressIndicator(
           valueColor:AlwaysStoppedAnimation<Color>(Color(0xFF3058a6)),
         )), // Show loading indicator
       );
@@ -148,14 +150,14 @@ class _ScenarioPageState extends State<ScenarioPage> {
     if (!_hasInternetConnection) {
       return Scaffold(
         appBar: AppBar(
-          backgroundColor: Color(0xFF3058a6),
-          iconTheme: IconThemeData(color: Colors.white),
-          title: Text(
+          backgroundColor: const Color(0xFF3058a6),
+          iconTheme: const IconThemeData(color: Colors.white),
+          title: const Text(
             'Scenario-Based Question',
             style: TextStyle(color: Colors.white),
           ),
         ),
-        body: Center(
+        body: const Center(
           child: Text(
             'No internet connection. Please check your connection and try again.',
             style: TextStyle(color: Colors.red, fontSize: 18),
@@ -167,9 +169,9 @@ class _ScenarioPageState extends State<ScenarioPage> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFF3058a6),
-        iconTheme: IconThemeData(color: Colors.white),
-        title: Text(
+        backgroundColor: const Color(0xFF3058a6),
+        iconTheme: const IconThemeData(color: Colors.white),
+        title: const Text(
           'Scenario-Based Question',
           style: TextStyle(color: Colors.white),
         ),
@@ -186,14 +188,14 @@ class _ScenarioPageState extends State<ScenarioPage> {
               Container(
                 padding: EdgeInsets.all(screenWidth * 0.04),
                 decoration: BoxDecoration(
-                  color: Color(0xfff6f2f1),
+                  color: const Color(0xfff6f2f1),
                   borderRadius: BorderRadius.circular(8.0),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.1),
                       spreadRadius: 2,
                       blurRadius: 8,
-                      offset: Offset(0, 4),
+                      offset: const Offset(0, 4),
                     ),
                   ],
                 ),
@@ -226,7 +228,7 @@ class _ScenarioPageState extends State<ScenarioPage> {
               SizedBox(height: screenHeight * 0.02),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFF3058a6), // Primary color
+                  backgroundColor: const Color(0xFF3058a6), // Primary color
                   padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                 ),
                 onPressed: _isAnswerSubmitted ? null : _submitAnswer, // Disable button if answer is submitted

@@ -9,7 +9,7 @@ class ResultPage extends StatelessWidget {
   final List<QuizQuestion> quizQuestions;
   final String quizTitle; // Add this field to show the quiz title
 
-  ResultPage({
+  const ResultPage({super.key, 
     required this.score,
     required this.totalQuestions,
     required this.quizQuestions,
@@ -20,13 +20,13 @@ class ResultPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFF3058a6),
-        iconTheme: IconThemeData(
+        backgroundColor: const Color(0xFF3058a6),
+        iconTheme: const IconThemeData(
           color: Colors.white,
         ),
         title: Text(
-          '$quizTitle',
-          style: TextStyle(
+          quizTitle,
+          style: const TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
           ),
@@ -34,7 +34,7 @@ class ResultPage extends StatelessWidget {
         elevation: 0,
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [Colors.white, Colors.white],
             begin: Alignment.topLeft,
@@ -47,7 +47,7 @@ class ResultPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Container(
-                padding: EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(16.0),
                 decoration: BoxDecoration(
                   color: Colors.black.withOpacity(0.4),
                   borderRadius: BorderRadius.circular(12.0),
@@ -56,19 +56,19 @@ class ResultPage extends StatelessWidget {
                   children: [
                     Text(
                       'You scored $score out of $totalQuestions!',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFF3058a6),
+                        backgroundColor: const Color(0xFF3058a6),
                         padding:
-                            EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                            const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
@@ -86,19 +86,19 @@ class ResultPage extends StatelessWidget {
                           (route) => false, // Remove all previous routes
                         );
                       },
-                      child: Text(
+                      child: const Text(
                         'Restart Quiz',
                         style: TextStyle(
                           color: Colors.white,
                         ),
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFF3058a6),
+                        backgroundColor: const Color(0xFF3058a6),
                         padding:
-                            EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                            const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
@@ -110,7 +110,7 @@ class ResultPage extends StatelessWidget {
                           (route) => false, // Remove all previous routes
                         );
                       },
-                      child: Text(
+                      child: const Text(
                         'Back to Home',
                         style: TextStyle(
                           color: Colors.white,

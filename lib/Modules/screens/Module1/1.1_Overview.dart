@@ -9,6 +9,8 @@ import '../../widgets/card.dart'; // Adjust the import path as per your structur
 import '../../../Login Signup/Screen/modulesMenu.dart'; // Import the ModulesPage class
 
 class HealthcareEthicsPage extends StatefulWidget {
+  const HealthcareEthicsPage({super.key});
+
   @override
   _HealthcareEthicsPageState createState() => _HealthcareEthicsPageState();
 }

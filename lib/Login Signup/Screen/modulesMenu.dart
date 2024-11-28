@@ -10,21 +10,23 @@ import '../../Modules/screens/Module1/1.5_CaseStudies.dart'; // Ensure this file
 import '../../Modules/screens/Module1/1.6_SummaryReviewPage.dart'; // Ensure this file contains `SummaryReviewPage1_6`
 
 class ModulesPage extends StatelessWidget {
+  const ModulesPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Modules", 
+        title: const Text("Modules", 
         style: TextStyle(
           color: Colors.white,
         ),
         ),
         backgroundColor: const Color(0xFF3058a6),
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: Colors.white,
         ),
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
               Icons.arrow_back), // You can change this to any icon you prefer
           onPressed: () {
             Navigator.push(
@@ -36,7 +38,7 @@ class ModulesPage extends StatelessWidget {
       ),
       body: SafeArea(
         child: ListView(
-          padding: EdgeInsets.symmetric(vertical: 8.0),
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
           children: [
             buildModuleTile(context, 'Module 1', [
               'Overview of Ethics in Healthcare',
@@ -90,7 +92,7 @@ class ModulesPage extends StatelessWidget {
           children: topics
               .map((topic) => ListTile(
                     contentPadding:
-                        EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                        const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                     title: Text(
                       topic,
                       style: TextStyle(

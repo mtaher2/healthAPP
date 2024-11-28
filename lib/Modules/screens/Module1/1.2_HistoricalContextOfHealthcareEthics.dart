@@ -5,6 +5,8 @@ import '../../../Login Signup/Widget/snackbar.dart';
 import '../../widgets/card.dart';
 
 class HistoricalContextPage1_2 extends StatefulWidget {
+  const HistoricalContextPage1_2({super.key});
+
   @override
   _HistoricalContextPage1_2State createState() =>
       _HistoricalContextPage1_2State();
@@ -15,7 +17,7 @@ class _HistoricalContextPage1_2State extends State<HistoricalContextPage1_2> {
   final Color primaryColor = const Color(0xFF3058a6);
   final Color secondaryColor = const Color(0xFF6d90c6);
   final Color accentColor = const Color(0xFFa4c6e5);
-  bool _isConnected = true;
+  final bool _isConnected = true;
   bool _isLoading = false;
   bool _isComplete = false;
   User? user = FirebaseAuth.instance.currentUser;
@@ -241,6 +243,8 @@ class _HistoricalContextPage1_2State extends State<HistoricalContextPage1_2> {
 }
 
 class FullScreenImagePage extends StatelessWidget {
+  const FullScreenImagePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

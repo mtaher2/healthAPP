@@ -28,6 +28,12 @@ dependencies:
   email_validator: ^3.0.0
   youtube_player_flutter: ^9.0.3
   audioplayers: ^6.1.0
+  animate_do: ^3.3.4
+  curved_navigation_bar: ^1.0.3
+  syncfusion_flutter_gauges: ^20.3.58
+  percent_indicator: ^4.2.3
+  dashed_circular_progress_bar: ^0.0.6
+  flutter_svg: ^1.0.3
 
 dev_dependencies:
   flutter_test:
@@ -38,6 +44,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+    - assets/icons/
     - assets/audio/1.4Module1Podcast.wav
 
   # fonts:

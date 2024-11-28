@@ -143,7 +143,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ? const Center(
                           child: CircularProgressIndicator(
                           valueColor:
-                              AlwaysStoppedAnimation<Color>(Color(0xff4771f5)),
+                              AlwaysStoppedAnimation<Color>(Color(0xff509E2D)),
                         ))
                       : MyButtons(onTap: loginUser, text: "Log In"),
                 ),

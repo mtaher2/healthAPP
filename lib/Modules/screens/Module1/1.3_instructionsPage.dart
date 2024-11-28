@@ -33,6 +33,8 @@ class InstructionsPage extends StatelessWidget {
     rationale: 'The hospital is ensuring a fair and equitable distribution of limited resources, focusing on the needs of the patients and their likelihood of benefit.',
   ),
 ];
+
+  InstructionsPage({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,7 +48,7 @@ class InstructionsPage extends StatelessWidget {
             color: Colors.white,
           ),
         ),
-        backgroundColor: Color(0xFF3058a6), // Primary color
+        backgroundColor: const Color(0xFF3058a6), // Primary color
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -243,8 +245,8 @@ class InstructionsPage extends StatelessWidget {
             Center(
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFF3058a6), // Primary color
-                  padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                  backgroundColor: const Color(0xFF3058a6), // Primary color
+                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                 ),
                 onPressed: () {
                   Navigator.push(

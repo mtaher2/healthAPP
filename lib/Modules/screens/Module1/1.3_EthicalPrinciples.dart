@@ -5,9 +5,11 @@ import '1.3_instructionsPage.dart';
 
 class EthicalPrinciplesPage extends StatelessWidget {
   // Define colors
-  final Color primaryColor = Color(0xFF3058a6);
-  final Color secondaryColor = Color(0xFF6d90c6);
-  final Color accentColor = Color(0xFFa4c6e5);
+  final Color primaryColor = const Color(0xFF3058a6);
+  final Color secondaryColor = const Color(0xFF6d90c6);
+  final Color accentColor = const Color(0xFFa4c6e5);
+
+  EthicalPrinciplesPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class EthicalPrinciplesPage extends StatelessWidget {
         backgroundColor: primaryColor,
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Colors.white,
           // gradient: LinearGradient(
           //   colors: [secondaryColor, accentColor],
@@ -43,7 +45,7 @@ class EthicalPrinciplesPage extends StatelessWidget {
                   'Informed consent is a critical component, ensuring patients understand the risks and benefits of treatments.',
               Icons.person,
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             _buildPrincipleCard(
               context,
               'Beneficence',
@@ -51,7 +53,7 @@ class EthicalPrinciplesPage extends StatelessWidget {
                   'Includes actions to promote the well-being and welfare of patients.',
               Icons.favorite,
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             _buildPrincipleCard(
               context,
               'Non-Maleficence',
@@ -59,7 +61,7 @@ class EthicalPrinciplesPage extends StatelessWidget {
                   'Important in decision-making processes, especially when potential risks are involved.',
               Icons.warning,
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             _buildPrincipleCard(
               context,
               'Justice',
@@ -67,7 +69,7 @@ class EthicalPrinciplesPage extends StatelessWidget {
                   'Concerns with the fair distribution of healthcare resources and ensuring access to care for all individuals, regardless of background or socioeconomic status.',
               Icons.scale,
             ),
-            SizedBox(height: 32),
+            const SizedBox(height: 32),
             Center(
               child: ElevatedButton(
                 onPressed: () {
@@ -77,15 +79,15 @@ class EthicalPrinciplesPage extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => InstructionsPage()),
                   );
                 },
-                child: Text('Take the Quiz'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor:
                       primaryColor, // Background color of the button
                   foregroundColor:
                       Colors.white, // Color of the text and icons on the button
-                  padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                  textStyle: TextStyle(fontSize: 18),
+                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                  textStyle: const TextStyle(fontSize: 18),
                 ),
+                child: Text('Take the Quiz'),
               ),
             ),
           ],

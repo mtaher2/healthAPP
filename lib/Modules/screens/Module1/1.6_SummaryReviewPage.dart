@@ -4,12 +4,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../../../Login Signup/Widget/snackbar.dart';
 
 class SummaryReviewPage1_6 extends StatefulWidget {
+  const SummaryReviewPage1_6({super.key});
+
   @override
   _SummaryReviewPage1_6 createState() => _SummaryReviewPage1_6();
 }
 
 class _SummaryReviewPage1_6 extends State<SummaryReviewPage1_6> {
-  bool _isConnected = true;
+  final bool _isConnected = true;
   bool _isLoading = false;
   bool _isComplete = false;
   User? user = FirebaseAuth.instance.currentUser; // Get the current user
@@ -120,16 +122,16 @@ class _SummaryReviewPage1_6 extends State<SummaryReviewPage1_6> {
               padding: EdgeInsets.all(screenWidth * 0.05),
               child: ListView(
                 children: [
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Text(
                     'Key Takeaways:',
                     style: TextStyle(
                       fontSize: screenWidth * 0.05,
                       fontWeight: FontWeight.bold,
-                      color: Color(0xFF3058a6),
+                      color: const Color(0xFF3058a6),
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   _buildKeyTakeaway(
                       'Ethical principles guide healthcare professionals in making decisions that respect patients\' rights.'),
                   _buildKeyTakeaway(
@@ -138,7 +140,7 @@ class _SummaryReviewPage1_6 extends State<SummaryReviewPage1_6> {
                       'Justice ensures fair treatment and resource allocation.'),
                   _buildKeyTakeaway(
                       'Non-maleficence is the obligation to avoid causing harm.'),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   // Add "Mark as Complete" button
                   Align(
                     alignment: Alignment
@@ -179,12 +181,12 @@ class _SummaryReviewPage1_6 extends State<SummaryReviewPage1_6> {
   Widget _buildKeyTakeaway(String text) {
     final screenWidth = MediaQuery.of(context).size.width;
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.symmetric(vertical: 10),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(Icons.check, color: Color(0xFF3058a6), size: screenWidth * 0.06),
-          SizedBox(width: 10),
+          Icon(Icons.check, color: const Color(0xFF3058a6), size: screenWidth * 0.06),
+          const SizedBox(width: 10),
           Expanded(
             child: Text(
               text,

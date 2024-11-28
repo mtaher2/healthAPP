@@ -7,19 +7,19 @@ class PrincipleCard extends StatelessWidget {
   final Color primaryColor;
 
   const PrincipleCard({
-    Key? key,
+    super.key,
     required this.title,
     required this.description,
     required this.icon,
     required this.primaryColor,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return Card(
       elevation: 5,
-      margin: EdgeInsets.symmetric(vertical: 8),
-      color: Color(0xfff6f2f1), // Background color of the card
+      margin: const EdgeInsets.symmetric(vertical: 8),
+      color: const Color(0xfff6f2f1), // Background color of the card
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Row(
@@ -29,7 +29,7 @@ class PrincipleCard extends StatelessWidget {
               size: 40,
               color: primaryColor,
             ),
-            SizedBox(width: 16),
+            const SizedBox(width: 16),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,10 +42,10 @@ class PrincipleCard extends StatelessWidget {
                       color: primaryColor,
                     ),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Text(
                     description,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 17,
                       fontWeight: FontWeight.bold,
                       color: Colors.black //primaryColor.withOpacity(0.7), // Slightly lighter for better readability

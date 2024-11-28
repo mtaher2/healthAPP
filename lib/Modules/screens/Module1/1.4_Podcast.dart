@@ -10,15 +10,17 @@ import '../../widgets/card.dart';
 const Color primaryColor = Color(0xFF3058a6);
 
 class EnhancedAudioPlayerPage extends StatefulWidget {
+  const EnhancedAudioPlayerPage({super.key});
+
   @override
   _EnhancedAudioPlayerPageState createState() =>
       _EnhancedAudioPlayerPageState();
 }
 
 class _EnhancedAudioPlayerPageState extends State<EnhancedAudioPlayerPage> {
-  AudioPlayer _audioPlayer = AudioPlayer();
-  Duration _duration = Duration();
-  Duration _position = Duration();
+  final AudioPlayer _audioPlayer = AudioPlayer();
+  Duration _duration = const Duration();
+  Duration _position = const Duration();
   bool isPlaying = false;
   bool isMuted = false;
   bool isLoading = false;
@@ -47,7 +49,7 @@ class _EnhancedAudioPlayerPageState extends State<EnhancedAudioPlayerPage> {
     _audioPlayer.onPlayerStateChanged.listen((PlayerState state) {
       if (state == PlayerState.completed) {
         setState(() {
-          _position = Duration();
+          _position = const Duration();
           isPlaying = false;
         });
       }
@@ -149,7 +151,7 @@ class _EnhancedAudioPlayerPageState extends State<EnhancedAudioPlayerPage> {
   void stop() async {
     await _audioPlayer.stop();
     setState(() {
-      _position = Duration();
+      _position = const Duration();
       isPlaying = false;
       isStopped = true;
     });
@@ -198,10 +200,10 @@ class _EnhancedAudioPlayerPageState extends State<EnhancedAudioPlayerPage> {
 
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: Colors.white,
         ),
-        title: Text('Enhanced Podcast Player',
+        title: const Text('Enhanced Podcast Player',
             style: TextStyle(color: Colors.white)),
         backgroundColor: primaryColor,
         elevation: 1,
@@ -241,9 +243,9 @@ class _EnhancedAudioPlayerPageState extends State<EnhancedAudioPlayerPage> {
                         'Encouraging a culture of openness where healthcare professionals can discuss and seek guidance on ethical issues.',
                     Icons.support,
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Container(
-                    margin: EdgeInsets.symmetric(vertical: 20.0),
+                    margin: const EdgeInsets.symmetric(vertical: 20.0),
                     padding: EdgeInsets.all(screenWidth * 0.05),
                     decoration: BoxDecoration(
                       color: Colors.grey[200],
@@ -253,14 +255,14 @@ class _EnhancedAudioPlayerPageState extends State<EnhancedAudioPlayerPage> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         isLoading
-                            ? CircularProgressIndicator(
+                            ? const CircularProgressIndicator(
                                 color: primaryColor,
                               )
                             : Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   IconButton(
-                                    icon: Icon(Icons.replay_10,
+                                    icon: const Icon(Icons.replay_10,
                                         color: primaryColor),
                                     iconSize: screenWidth * 0.09,
                                     onPressed: rewind,
@@ -280,7 +282,7 @@ class _EnhancedAudioPlayerPageState extends State<EnhancedAudioPlayerPage> {
                                     ),
                                   ),
                                   IconButton(
-                                    icon: Icon(Icons.forward_10,
+                                    icon: const Icon(Icons.forward_10,
                                         color: primaryColor),
                                     iconSize: screenWidth * 0.09,
                                     onPressed: forward,
