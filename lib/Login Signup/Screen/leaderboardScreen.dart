@@ -11,15 +11,15 @@ class LeaderboardScreen extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
-        children: [
-          Row(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(kToolbarHeight),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Image.asset(
-                'assets/images/galla_logo.jpeg',
+                'assets/images/galla_logo.jpeg', // Replace with your logo path
                 height: screenHeight * 0.07,
               ),
               BuildTopButton(
@@ -27,7 +27,7 @@ class LeaderboardScreen extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => HomeScreen(),
+                      builder: (context) => HomeScreen(), // Replace with your screen
                     ),
                   );
                 },
@@ -36,7 +36,13 @@ class LeaderboardScreen extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 24.0),
+        ),
+      ),
+      backgroundColor: Colors.white,
+      body: ListView(
+        padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
+        children: [
+          // SizedBox(height: 24.0),
           LeaderboardEntry(
             rank: '#1',
             userName: 'User Name',

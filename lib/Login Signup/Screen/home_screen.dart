@@ -192,7 +192,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => ModulesPage(),
+                                  builder: (context) => ModulePage(),
                                 ),
                               );
                             },
@@ -281,7 +281,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           if (label == 'MODULES') {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const ModulesPage()),
+              MaterialPageRoute(builder: (context) =>  ModulePage()),
             );
           } else if (label == 'quizzes & assignments') {
             Navigator.push(

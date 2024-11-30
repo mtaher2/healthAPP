@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_firebase_project/Login%20Signup/Widget/button.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../Services/authentication.dart';
 import '../Widget/snackbar.dart';
 import '../Widget/text_field.dart';
@@ -32,7 +33,8 @@ class _SignupScreenState extends State<SignupScreen> {
     // Check for internet connectivity
     var connectivityResult = await (Connectivity().checkConnectivity());
     if (connectivityResult == ConnectivityResult.none) {
-      showSnackBar(context, 'No internet connection. Please check your network.',Colors.red);
+      showSnackBar(context,
+          'No internet connection. Please check your network.', Colors.red);
       return;
     }
 
@@ -70,70 +72,198 @@ class _SignupScreenState extends State<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: SafeArea(
-        child: SizedBox(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: height / 2.7,
-                child: Image.asset('assets/images/Medical prescription-rafiki.png'),
-              ),
-              TextFieldInput(
-                icon: Icons.person,
-                textEditingController: nameController,
-                hintText: 'Enter your name',
-                textInputType: TextInputType.text,
-              ),
-              TextFieldInput(
-                icon: Icons.email,
-                textEditingController: emailController,
-                hintText: 'Enter your email',
-                textInputType: TextInputType.text,
-              ),
-              TextFieldInput(
-                icon: Icons.lock,
-                textEditingController: passwordController,
-                hintText: 'Enter your password',
-                textInputType: TextInputType.text,
-                isPass: true,
-              ),
-              // Update the button to show a loading indicator
-              isLoading
-                  ? const CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation<Color>(Color(0xff4771f5)),
-                  ) // Show loading indicator
-                  : MyButtons(onTap: signupUser, text: "Sign Up"),
-              const SizedBox(height: 50),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+      backgroundColor: Colors.white,
+      resizeToAvoidBottomInset:
+          false, // Prevent the UI from shifting when keyboard appears
+      body: Stack(
+        children: [
+          // SVG Background positioned lower down, behind the SafeArea
+          Positioned.fill(
+            top: 50, // Adjust the SVG position slightly lower
+            child: SvgPicture.asset(
+              'assets/images/register.svg', // Replace with your SVG path
+              fit: BoxFit.cover,
+              alignment: Alignment.topCenter,
+            ),
+          ),
+          // Foreground content (SafeArea with text fields, etc.)
+          SafeArea(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.08),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text("Already have an account?"),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const LoginScreen(),
+                  // Galla University Logo
+                  Padding(
+                    padding: EdgeInsets.only(top: screenHeight * 0.02),
+                    child: Image.asset(
+                      'assets/images/galla_logo.jpeg', // Replace with your logo path
+                      height: screenHeight * 0.05,
+                    ),
+                  ),
+                  const Spacer(),
+                  //name
+                  const Text(
+                    "Name",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w800,
+                      color: Color(0XFF12284F),
+                    ),
+                  ),
+                  SizedBox(height: screenHeight * 0.01),
+                  // Email Input
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(8),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          blurRadius: 6,
+                          offset: const Offset(0, 2),
                         ),
-                      );
-                    },
-                    child: const Text(
-                      " Login",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        decoration: TextDecoration.underline,
-                        color: Color(0xff4771f5)
+                      ],
+                    ),
+                    child: TextField(
+                      controller: nameController,
+                      keyboardType: TextInputType.name,
+                      decoration: const InputDecoration(
+                        contentPadding: EdgeInsets.symmetric(horizontal: 16),
+                        border: InputBorder.none,
                       ),
                     ),
-                  )
+                  ),
+                  SizedBox(height: screenHeight * 0.03),
+                  // Email Label
+                  const Text(
+                    "Email",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w800,
+                      color: Color(0XFF12284F),
+                    ),
+                  ),
+                  SizedBox(height: screenHeight * 0.01),
+                  // Email Input
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(8),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          blurRadius: 6,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: TextField(
+                      controller: emailController,
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: const InputDecoration(
+                        contentPadding: EdgeInsets.symmetric(horizontal: 16),
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: screenHeight * 0.03),
+                  // Password Label
+                  const Text(
+                    "Password",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w800,
+                      color: Color(0XFF12284F),
+                    ),
+                  ),
+                  SizedBox(height: screenHeight * 0.01),
+                  // Password Input
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(8),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          blurRadius: 6,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: TextField(
+                      controller: passwordController,
+                      obscureText: true,
+                      decoration: const InputDecoration(
+                        contentPadding: EdgeInsets.symmetric(horizontal: 16),
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: screenHeight * 0.05),
+
+                  Center(
+                    child: Container(
+                      width: screenWidth * 0.52,
+                      child: isLoading
+                          ? const Center(
+                              child: CircularProgressIndicator(
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  Color(0xFF509E2D),
+                                ),
+                              ),
+                            )
+                          : ElevatedButton(
+                              onPressed: signupUser,
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xFF097CBF),
+                                padding: EdgeInsets.symmetric(
+                                    vertical: screenHeight * 0.013),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                              ),
+                              child: const Text(
+                                "sign up",
+                                style: TextStyle(
+                                  fontSize: 24,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                    ),
+                  ),
+                  SizedBox(height: screenHeight * 0.02),
+                  // Signup Link
+                  Center(
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pop(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const LoginScreen(),
+                          ),
+                        );
+                      },
+                      child: const Text(
+                        "Already have an account? Login instead ",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xFF12284F),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: screenHeight * 0.1),
                 ],
               ),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }

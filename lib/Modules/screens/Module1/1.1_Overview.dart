@@ -168,7 +168,7 @@ class _HealthcareEthicsPageState extends State<HealthcareEthicsPage> {
             // Navigate to ModulesPage when the back button is pressed
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => ModulesPage()),
+              MaterialPageRoute(builder: (context) => ModulePage()),
             );
           },
         ),
