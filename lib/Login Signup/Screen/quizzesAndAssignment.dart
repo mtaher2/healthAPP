@@ -4,9 +4,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import '../Widget/buildTopButton.dart';
+import '../Widget/chatBotScreen.dart';
 import '../Widget/chatbot.dart';
 import 'LeaderboardScreen.dart';
 import 'ErrorPageScreen.dart';
+import 'QuizPage.dart';
 import 'home_screen.dart';
 
 class QuizAssignmentScreen extends StatefulWidget {
@@ -49,22 +51,47 @@ class _QuizAssignmentScreenState extends State<QuizAssignmentScreen> {
 
   Future<void> _fetchData() async {
     if (user != null) {
-      final moduleDoc = await _firestore
-          .collection('Modules')
-          .doc('AINc83uOgA8i1W1quLgy')
-          .get();
-      quizzes = List<String>.from(moduleDoc.data()?['quizzes'] ?? []);
-      assignments = List<String>.from(moduleDoc.data()?['assignment'] ?? []);
+      try {
+        // Fetch module data to get quizzes and assignments
+        final moduleDoc = await _firestore
+            .collection('Modules')
+            .doc('AINc83uOgA8i1W1quLgy')
+            .get();
 
-      final userDoc = await _firestore.collection('users').doc(user!.uid).get();
-      final quizGrades = userDoc.data()?['quiz_grades'] ?? {};
+        // Initialize quizzes and assignments lists from the module document
+        quizzes = List<String>.from(moduleDoc.data()?['quizzes'] ?? []);
+        assignments = List<String>.from(moduleDoc.data()?['assignment'] ?? []);
 
-      setState(() {
+        // Fetch user document from Firestore
+        final userDoc =
+            await _firestore.collection('users').doc(user!.uid).get();
+
+        // Initialize the quiz completion status map
+        final quizCompletionStatus = <String, bool>{};
+
         for (String quiz in quizzes) {
-          quizCompletionStatus[quiz] = quizGrades[quiz]?['score'] != null;
+          // Fetch the quiz document from the user's 'quizzes' subcollection
+          final quizDoc = userDoc.reference.collection('quizzes').doc(quiz);
+
+          // Wait for the document to be fetched asynchronously
+          final quizSnapshot = await quizDoc.get();
+
+          // Check if the quiz document exists and has a score
+          quizCompletionStatus[quiz] =
+              quizSnapshot.exists && quizSnapshot.data()?['score'] != null;
         }
-        isLoading = false;
-      });
+
+        // Update state after all quizzes have been checked
+        setState(() {
+          this.quizCompletionStatus = quizCompletionStatus;
+          isLoading = false;
+        });
+      } catch (e) {
+        print('Error fetching data: $e');
+        setState(() {
+          isLoading = false; // Hide loading spinner in case of error
+        });
+      }
     }
   }
 
@@ -102,26 +129,43 @@ class _QuizAssignmentScreenState extends State<QuizAssignmentScreen> {
       // Initialize userScore as null
       dynamic userScore = null;
 
-      // Fetch user document from Firestore
-      final userDoc = await _firestore.collection('users').doc(user!.uid).get();
+      try {
+        // Fetch user document from Firestore
+        final userDoc =
+            await _firestore.collection('users').doc(user!.uid).get();
 
-      // Check if quiz_grades and quizKey exist in the user's data
-      if (userDoc.data()?['quiz_grades'] != null &&
-          userDoc.data()?['quiz_grades'][quizKey] != null) {
-        userScore = userDoc.data()?['quiz_grades'][quizKey]['score'];
+        // Check if quizzes subcollection exists and contains the quizKey
+        if (userDoc.exists) {
+          final quizzesCollection = userDoc.reference.collection('quizzes');
+          final quizDoc = await quizzesCollection.doc(quizKey).get();
+
+          // If quiz document exists, fetch the score
+          if (quizDoc.exists) {
+            userScore = quizDoc.data()?['highestScore'];
+          }
+        }
+
+        // Fetch max grade for the quiz from Modules collection
+        final moduleDoc = await _firestore
+            .collection('Modules')
+            .doc(
+                'AINc83uOgA8i1W1quLgy') // Make sure this document ID is correct
+            .get();
+
+        final maxGrade = moduleDoc.exists
+            ? moduleDoc.data()?['grades']?[quizKey] ??
+                5 // Default max grade to 5 if not found
+            : 5; // Default max grade to 5 if module doc doesn't exist
+
+        // Determine scoreText based on whether the quiz is completed
+        scoreText = userScore != null
+            ? '${userScore ?? 0}/$maxGrade' // Display user's score and max grade
+            : '$maxGrade points'; // Display max grade if quiz not taken or score not found
+      } catch (e) {
+        print('Error fetching data: $e');
+        // Handle the error and set scoreText accordingly
+        scoreText = 'Error loading score';
       }
-
-      // Fetch max grade for the quiz from Modules collection
-      final moduleDoc = await _firestore
-          .collection('Modules')
-          .doc('AINc83uOgA8i1W1quLgy')
-          .get();
-      final maxGrade = moduleDoc.data()?['grades']?[quizKey] ?? 5;
-
-      // Update scoreText based on whether the quiz is completed
-      scoreText = isCompleted
-          ? '${userScore ?? 0}/$maxGrade' // Display user's score and max grade
-          : '$maxGrade points'; // Display max grade if not taken
     }
 
     // Close the loading dialog
@@ -181,7 +225,12 @@ class _QuizAssignmentScreenState extends State<QuizAssignmentScreen> {
                       child: ElevatedButton(
                         onPressed: () {
                           Navigator.pop(context); // Close the dialog
-                          Navigator.pushNamed(context, '/quizscreen/$quizKey');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => QuizPage(quizName: quizKey),
+                            ),
+                          );
                         },
                         child: Text(
                           quizStatusText,
@@ -282,28 +331,36 @@ class _QuizAssignmentScreenState extends State<QuizAssignmentScreen> {
                               onTap: () {
                                 _showQuizDialog(quizKey);
                               },
-                              child: Stack(
-                                alignment: Alignment.center,
-                                children: [
-                                  SvgPicture.asset(
-                                    isCompleted
-                                        ? quizFinishedImagePath
-                                        : quizImagePath,
-                                    width: 60,
-                                    height: 60,
-                                  ),
-                                  Positioned(
-                                    top: 55,
-                                    child: Text(
-                                      'Q${index + 1}',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black,
+                              child: Container(
+                                height: 150,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Stack(
+                                  alignment: Alignment.center,
+                                  children: [
+                                    SvgPicture.asset(
+                                      isCompleted
+                                          ? quizFinishedImagePath
+                                          : quizImagePath,
+                                      width: 60,
+                                      height: 60,
+                                      fit: BoxFit.cover,
+                                    ),
+                                    Positioned(
+                                      top:
+                                          55, // Adjust as needed for proper positioning
+                                      child: Text(
+                                        'Q${index + 1}',
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             );
                           },
@@ -356,24 +413,39 @@ class _QuizAssignmentScreenState extends State<QuizAssignmentScreen> {
                     ),
                   ),
                 ),
-                Container(
-                  color: Colors.transparent,
-                  width: double.infinity,
-                  height: 85,
-                  child: BuildChatBotWithCurvedLines(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => LeaderboardScreen(),
-                        ),
-                      );
-                    },
-                    screenWidth: screenWidth,
-                  ),
+               Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+              color: Colors.transparent,
+              width: double.infinity,
+              height: 85,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ChatBotScreen(),
+                    ),
+                  );
+                },
+                child: BuildChatBotWithCurvedLines(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => LeaderboardScreen(),
+                      ),
+                    );
+                  },
+                  screenWidth: MediaQuery.of(context).size.width,
                 ),
-              ],
+              ),
             ),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -114,10 +114,10 @@ class _VerificationScreenState extends State<VerificationScreen> {
               height: 100,
             ),
             const SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.symmetric(
+            const Padding(
+              padding: EdgeInsets.symmetric(
                   horizontal: 30.0), // Adjust padding for the text
-              child: const Text(
+              child: Text(
                 'a verefication email have been send to you ',
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -128,10 +128,10 @@ class _VerificationScreenState extends State<VerificationScreen> {
               ),
             ),
             const SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.symmetric(
+            const Padding(
+              padding: EdgeInsets.symmetric(
                   horizontal: 20.0), // Add padding here too
-              child: const Text(
+              child: Text(
                 'Please check your inbox and click on the verification link to activate your account.',
                 style: TextStyle(
                   fontSize: 17.5,
@@ -171,7 +171,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                       : const Color(0xFFA1D55D),
                 ),
                 child: Text(
-                  style: TextStyle(
+                  style: const TextStyle(
                   color: Colors.black,
                 ),
                   _isButtonDisabled

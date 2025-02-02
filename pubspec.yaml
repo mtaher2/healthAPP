@@ -34,6 +34,7 @@ dependencies:
   percent_indicator: ^4.2.3
   dashed_circular_progress_bar: ^0.0.6
   flutter_svg: ^1.0.3
+  confetti: ^0.7.0
 
 dev_dependencies:
   flutter_test:
@@ -44,6 +45,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+    - assets/images/Modules/Module0/
     - assets/icons/
     - assets/audio/1.4Module1Podcast.wav
 
